@@ -1,26 +1,35 @@
 import React from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import { NavigationContainer } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/native-stack';
 
-export default function Home() {
+
+//import { Calendar } from 'react-native-calendars';
+
+  const Stack = createStackNavigator()
+
+import Clientes from './screens/Clientes'
+import MisCasos from './screens/MisCasos'
+import Home from './screens/Home'
+
+
+function MyStack(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="Clientes" component={Clientes}/>
+      <Stack.Screen name="MisCasos" component={MisCasos}/>
+      <Stack.Screen name="Home" component={Home}/>
+    </Stack.Navigator>
+  )
+}
+
+
+export default function app() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Despacho Jurídico</Text>
-      <Text style={styles.subtitle}>Se ha identificado como: Alfonso B</Text>
-      <View style={styles.line} />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Mis casos</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Reuniones</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Clientes</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.title}>Fechas importantes</Text>
-      <Calendar />
-    </View>
+    <NavigationContainer>
+      <MyStack/>
+    </NavigationContainer>
 
   );
 }
