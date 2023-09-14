@@ -1,11 +1,12 @@
-import React from "react";
-import { View,Text } from "react-native";
+import React from 'react';
+import { View, Text } from 'react-native';
 
-const MisCasos = () =>{
+const MisCasos = () => {
     return(
         <View>
             <Text>Mis Casos</Text>
         </View>
     )
 }
-export default MisCasos
+
+export default MisCasos;

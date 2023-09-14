@@ -1,11 +1,11 @@
-import React from "react";
-import { View,Text } from "react-native";
+import React from 'react';
+import { View,Text } from 'react-native';
 
-const Clientes = () =>{
+const Clientes = () => {
     return(
         <View>
             <Text>Clientes</Text>
         </View>
     )
 }
-export default Clientes
+export default Clientes;
