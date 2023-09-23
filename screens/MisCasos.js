@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View,Button, TextInput, ScrollView, StyleSheet } from 'react-native';
 
 const MisCasos = () => {
     return(

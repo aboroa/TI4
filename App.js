@@ -24,8 +24,10 @@ function MyStack(){
   return(
 
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home}/>
         <Stack.Screen name="Clientes" component={Clientes}/>
+
+        <Stack.Screen name="Home" component={Home}/>
+
         <Stack.Screen name="MisCasos" component={MisCasos}/>
 
 
