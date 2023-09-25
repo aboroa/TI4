@@ -10,6 +10,8 @@ const firebaseConfig = {
 
   authDomain: "abogados-bac85.firebaseapp.com",
 
+  databaseURL: "https://abogados-bac85-default-rtdb.firebaseio.com",
+
   projectId: "abogados-bac85",
 
   storageBucket: "abogados-bac85.appspot.com",
@@ -18,7 +20,8 @@ const firebaseConfig = {
 
   appId: "1:138704159954:web:7543936a876670abe1590b",
 
-  measurementId: "G-558281KS28",
+  measurementId: "G-558281KS28"
+
 
 
 };
