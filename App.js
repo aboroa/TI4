@@ -3,13 +3,7 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
-
 //mport * as React from 'react';
-
-
-
-
 
 //import { Calendar } from 'react-native-calendars';
 
@@ -18,7 +12,7 @@ const Stack = createNativeStackNavigator();
 import Clientes from './screens/Clientes'
 import MisCasos from './screens/MisCasos'
 import Home from './screens/Home'
-
+import Eventos from './screens/Eventos.js'
 
 function MyStack(){
   return(
@@ -30,7 +24,7 @@ function MyStack(){
 
         <Stack.Screen name="MisCasos" component={MisCasos}/>
 
-
+        <Stack.Screen name="Eventos" component={Eventos}/>
 
       </Stack.Navigator>
 

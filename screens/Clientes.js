@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Button, TextInput, ScrollView, StyleSheet } from 'react-native';
 import { getDatabase, ref, set } from 'firebase/database';
-
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
 
 import { db } from '../database/firebaseConfig';
 
@@ -12,6 +12,8 @@ const Clientes = () => {
     telefonocliente: '',
     Observaciones: ''
   });
+
+  const navigation = useNavigation(); // Obtiene la función de navegación
 
   const hadleChangeText = (nombrecliente, value) => {
     setState({ ...state, [nombrecliente]: value });
@@ -29,6 +31,14 @@ const Clientes = () => {
       });
       alert('Guardado');
     }
+  };
+
+  // Función para navegar a la pantalla "Eventos"
+  const navigateToEventos = () => {
+    navigation.navigate('Eventos');
+  };
+  const navigateToMisCasos = () => {
+    navigation.navigate('MisCasos');
   };
 
   return (
@@ -59,6 +69,14 @@ const Clientes = () => {
       </View>
       <View>
         <Button title="Guardar Cliente" onPress={() => saveuser()}></Button>
+      </View>
+
+      {/* Agrega un botón para navegar a "Eventos" */}
+      <View>
+        <Button title="Ir a Eventos" onPress={navigateToEventos}></Button>
+      </View>
+      <View>
+        <Button title="Ir a Mis Casos" onPress={navigateToMisCasos}></Button>
       </View>
     </ScrollView>
   );
