@@ -1,55 +1,46 @@
-import React from 'react';
-import { View, Button, TextInput, ScrollView, StyleSheet, Text } from 'react-native';
-import { getDatabase, ref, set } from 'firebase/database';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { getDatabase, ref, onValue, off } from 'firebase/database';
 
-import { db } from '../database/firebaseConfig';
 const MisClientes = () => {
-  const navigation = useNavigation();
+  const [misclientes, setMisClientes] = useState([]);
 
-  const misclientes = [
-    {
-      nombre: 'Juan Pérez',
-      correoElectronico: 'juanperez@gmail.com',
-      telefono: '555-1234',
-      direccion: 'Calle 123, Ciudad',
-      observaciones: 'Cliente debe presentar la documentacion actualizada',
-    },
-    {
-      nombre: 'María García',
-      correoElectronico: 'mariagarcia@gmail.com',
-      telefono: '555-5678',
-      direccion: 'Avenida 456, Ciudad',
-      observaciones: '',
-    },
-  ];
+  useEffect(() => {
+    const database = getDatabase();
+    const clientesRef = ref(database, 'clientes');
+
+    const handleData = snapshot => {
+      const data = snapshot.val();
+      const clientesList = [];
+      for (let id in data) {
+        clientesList.push({ id, ...data[id] });
+      }
+      setMisClientes(clientesList);
+    };
+
+    onValue(clientesRef, handleData, error => {
+      console.error(error);
+    });
+
+    return () => {
+      // Cleanup: Desvincular el listener para evitar múltiples llamadas y potenciales errores de memoria
+      off(clientesRef, handleData);
+    };
+
+  }, []);
 
   return (
-    <View>
+    <ScrollView style={{ flex: 1 }}>
       <Text style={styles.title}>Mis Clientes</Text>
-      <View style={styles.table}>
-        <View style={styles.row}>
-          <Text style={styles.header}>Nombre</Text>
-          <Text style={styles.header}>Correo electrónico</Text>
-          <Text style={styles.header}>Teléfono</Text>
-          <Text style={styles.header}>Dirección</Text>
-          <Text style={styles.header}>Observaciones</Text>
+      {misclientes.map(cliente => (
+        <View key={cliente.id} style={styles.clienteContainer}>
+          <Text style={styles.clienteText}>Nombre: {cliente.nombre}</Text>
+          <Text style={styles.clienteText}>Correo electrónico: {cliente.email}</Text>
+          <Text style={styles.clienteText}>Teléfono: {cliente.telefono}</Text>
+          <Text style={styles.clienteText}>Observaciones: {cliente.observaciones}</Text>
         </View>
-        {misclientes.map((cliente, index) => (
-          <View key={index} style={[styles.row, index % 2 && { backgroundColor: '#e6e6e6' }]}>
-            <Text style={{ flex: 1, padding: 10 }}>{cliente.nombre}</Text>
-            <Text style={{ flex: 1, padding: 10 }}>{cliente.correoElectronico}</Text>
-            <Text style={{ flex: 1, padding: 10 }}>{cliente.telefono}</Text>
-            <Text style={{ flex: 1, padding: 10 }}>{cliente.direccion}</Text>
-            <Text style={{ flex: 1, padding: 10 }}>{cliente.observaciones}</Text>
-            {/* Puedes agregar un botón aquí y asignarle una función, como navegar a otra pantalla */}
-          </View>
-        ))}
-
-      </View>
-
-    </View>
-    
+      ))}
+    </ScrollView>
   );
 };
 
@@ -60,20 +51,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 20,
   },
-  table: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
-    overflow: 'hidden',
+  clienteContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
   },
-  row: {
-    flexDirection: 'row',
-    backgroundColor: '#f2f2f2',
-  },
-  header: {
-    flex: 1,
-    padding: 10,
-    fontWeight: 'bold',
+  clienteText: {
+    fontSize: 16,
+    marginVertical: 2,
   },
 });
+
 export default MisClientes;

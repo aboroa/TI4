@@ -9,39 +9,32 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-import Clientes from './screens/Clientes'
+import Login from './screens/Login'
+import SignUp from './screens/SignUp'
+import AgregarCliente from './screens/AgregarCliente'
 import MisCasos from './screens/MisCasos'
 import Home from './screens/Home'
-<<<<<<< HEAD
-import pruebas from './screens/pruebas ';
-import Eventos from './screens/Eventos';
-import MisClientes from './screens/MisClientes';
-
-=======
 import Eventos from './screens/Eventos.js'
->>>>>>> main
+import MisClientes from './screens/MisClientes';
 
 function MyStack(){
   return(
 
       <Stack.Navigator>
+
+        <Stack.Screen name="Login" component={Login}/>
+
+        <Stack.Screen name="SignUp" component={SignUp}/> 
+
         <Stack.Screen name="Home" component={Home}/> 
-
-        <Stack.Screen name="Clientes" component={Clientes}/>
-
-        <Stack.Screen name="MisCasos" component={MisCasos}/>
-
-<<<<<<< HEAD
-        <Stack.Screen name="pruebas" component={pruebas}/>
-
-        <Stack.Screen name="Eventos" component={Eventos}/>
 
         <Stack.Screen name="MisClientes" component={MisClientes}/>
 
+        <Stack.Screen name="AgregarCliente" component={AgregarCliente}/>
 
-=======
+        <Stack.Screen name="MisCasos" component={MisCasos}/>
+
         <Stack.Screen name="Eventos" component={Eventos}/>
->>>>>>> main
 
       </Stack.Navigator>
 

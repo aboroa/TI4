@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { getDatabase, ref, onValue } from 'firebase/database';
 
 const MisCasos = () => {
-  const navigation = useNavigation();
+  const [casos, setCasos] = useState([]);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const casosRef = ref(db, 'casos');
+
+    // Escuchar cambios en la base de datos
+    const unsubscribe = onValue(casosRef, (snapshot) => {
+      const data = snapshot.val();
+      const tempList = [];
+      for (let key in data) {
+        tempList.push(data[key]);
+      }
+      setCasos(tempList);
+    });
+
+    // Limpiar el listener al desmontar el componente
+    return () => unsubscribe();
+  }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Mis Casos</Text>
-      <View style={styles.case}>
-        <Text style={styles.caseTitle}>Divorcio, Juan Perez</Text>
-        <Text style={styles.caseDescription}>Descripción del caso:</Text>
-        <Text style={styles.caseDescription}>Divorcio por diferencias irreconciliables, ambos de acuerdo con el divorcio.</Text>
-        <Text style={styles.caseDescription}>Fecha: 25 de septiembre de 2023.</Text>
-      </View>
-      <View style={styles.case}>
-        <Text style={styles.caseTitle}>Pensión Alimenticia, Juan Lopez</Text>
-      </View>
+      {casos.map((caso, index) => (
+        <View key={index} style={styles.case}>
+          <Text style={styles.caseTitle}>{caso.Causa}, {caso.Cliente}</Text>
+          <Text style={styles.caseDescription}>Descripción del caso: {caso.Descripcion}</Text>
+          <Text style={styles.caseDescription}>Fecha: {caso.Fecha}</Text>
+        </View>
+      ))}
     </View>
   );
 };
