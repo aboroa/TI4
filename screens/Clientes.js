@@ -14,6 +14,7 @@ const Clientes = () => {
     Observaciones: ''
   });
 
+
   const hadleChangeText = (nombrecliente, value) => {
     setState({ ...state, [nombrecliente]: value });
   };
@@ -22,7 +23,7 @@ const Clientes = () => {
     if (state.nombrecliente === '') {
       alert('Ingrese los datos');
     } else {
-      set(ref(db, 'clientes/usuario' ), {
+      set(ref(db, 'clientes' ), {
 
         nombre: state.nombrecliente,
         email: state.mailcliente,
@@ -34,6 +35,16 @@ const Clientes = () => {
     }
   };
 
+  // Función para navegar a la pantalla "Eventos"
+  const navigateToEventos = () => {
+    navigation.navigate('Eventos');
+  };
+  const navigateToMisCasos = () => {
+    navigation.navigate('MisCasos');
+  };
+  const navigateTopruebas = () => {
+    navigation.navigate('pruebas');
+  };
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -61,6 +72,17 @@ const Clientes = () => {
         <View style={styles.buttonContainer}>
           <Button title="Guardar Cliente" onPress={() => saveuser()} style={styles.button}></Button>
         </View>
+      </View>
+
+      {/* Agrega un botón para navegar a "Eventos" */}
+      <View>
+        <Button title="Ir a Eventos" onPress={navigateToEventos}></Button>
+      </View>
+      <View>
+        <Button title="Ir a Mis Casos" onPress={navigateToMisCasos}></Button>
+      </View>
+      <View>
+        <Button title="Ir a pruebas" onPress={navigateTopruebas}></Button>
       </View>
     </ScrollView>
   );

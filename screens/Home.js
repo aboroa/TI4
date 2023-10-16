@@ -1,30 +1,27 @@
 import React from 'react';
-import { View, Button, TextInput, ScrollView, StyleSheet, Image } from 'react-native';
+import { View, Button, TextInput, ScrollView, StyleSheet, Image,  Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const Home = () => {
-  const navigation = useNavigation();
-
+  const navigation1 = useNavigation();
+  const navigation2 = useNavigation();
+  const navigation3 = useNavigation();
+  const navigation4 = useNavigation();
   const image = require('../images/logo.png');
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
  <Image source={image} style={[styles.image, { alignSelf: 'center' }]} />
       <text>Estudio Juridico</text>
-      <Button title='Mis Casos' onPress={() => navigation.navigate('MisCasos')} style={styles.button}>
-        <Text style={styles.buttonText}>Ver todos tus casos</Text>
+      <Button title='Mis Casos' onPress={() => navigation1.navigate('MisCasos')} style={styles.button}>
       </Button>
       <Button title='Reuniones' style={styles.button}>
-        <Text style={styles.buttonText}>Ver todas tus reuniones</Text>
       </Button>
-      <Button title='Mis eventos' onPress={() => navigation.navigate('MisEventos')} style={styles.button}>
-        <Text style={styles.buttonText}>Ver todos tus eventos</Text>
+      <Button title='Mis eventos' onPress={() => navigation2.navigate('Eventos')} style={styles.button}>
       </Button>
-      <Button title='Mis Clientes' onPress={() => navigation.navigate('MisClientes')} style={styles.button}>
-        <Text style={styles.buttonText}>Ver todos tus clientes</Text>
+      <Button title='Mis Clientes' onPress={() => navigation3.navigate('MisClientes')} style={styles.button}>
       </Button>
-      <Button title='Agregar Clientes' onPress={() => navigation.navigate('Clientes')} style={styles.button}>
-        <Text style={styles.buttonText}>Ver todos tus clientes</Text>
+      <Button title='Agregar Clientes' onPress={() => navigation4.navigate('Clientes')} style={styles.button}>
       </Button>
     </ScrollView>
   );

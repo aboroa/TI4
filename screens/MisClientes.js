@@ -6,8 +6,8 @@ import { useNavigation } from '@react-navigation/native';
 import { db } from '../database/firebaseConfig';
 const MisClientes = () => {
   const navigation = useNavigation();
-  const navigation1 = useNavigation();
-  const clientes = [
+
+  const misclientes = [
     {
       nombre: 'Juan Pérez',
       correoElectronico: 'juanperez@gmail.com',
@@ -35,14 +35,14 @@ const MisClientes = () => {
           <Text style={styles.header}>Dirección</Text>
           <Text style={styles.header}>Observaciones</Text>
         </View>
-        {clientes.map((cliente, index) => (
+        {misclientes.map((cliente, index) => (
           <View key={index} style={[styles.row, index % 2 && { backgroundColor: '#e6e6e6' }]}>
             <Text style={{ flex: 1, padding: 10 }}>{cliente.nombre}</Text>
             <Text style={{ flex: 1, padding: 10 }}>{cliente.correoElectronico}</Text>
             <Text style={{ flex: 1, padding: 10 }}>{cliente.telefono}</Text>
             <Text style={{ flex: 1, padding: 10 }}>{cliente.direccion}</Text>
             <Text style={{ flex: 1, padding: 10 }}>{cliente.observaciones}</Text>
-            <button title='Agregar Usuarios' onPress={() => navigation1.navigate('Clientes')}></button>
+            {/* Puedes agregar un botón aquí y asignarle una función, como navegar a otra pantalla */}
           </View>
         ))}
 
