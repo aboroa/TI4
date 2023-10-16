@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { View, Button, TextInput, ScrollView, StyleSheet } from 'react-native';
 import { getDatabase, ref, set } from 'firebase/database';
+<<<<<<< HEAD
 import { useNavigation } from '@react-navigation/native';
+=======
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
+>>>>>>> main
 
 import { db } from '../database/firebaseConfig';
 
@@ -14,6 +18,10 @@ const Clientes = () => {
     Observaciones: ''
   });
 
+<<<<<<< HEAD
+=======
+  const navigation = useNavigation(); // Obtiene la función de navegación
+>>>>>>> main
 
   const hadleChangeText = (nombrecliente, value) => {
     setState({ ...state, [nombrecliente]: value });
@@ -42,9 +50,13 @@ const Clientes = () => {
   const navigateToMisCasos = () => {
     navigation.navigate('MisCasos');
   };
+<<<<<<< HEAD
   const navigateTopruebas = () => {
     navigation.navigate('pruebas');
   };
+=======
+
+>>>>>>> main
   return (
     <ScrollView>
       <View style={styles.form}>
@@ -83,6 +95,14 @@ const Clientes = () => {
       </View>
       <View>
         <Button title="Ir a pruebas" onPress={navigateTopruebas}></Button>
+      </View>
+
+      {/* Agrega un botón para navegar a "Eventos" */}
+      <View>
+        <Button title="Ir a Eventos" onPress={navigateToEventos}></Button>
+      </View>
+      <View>
+        <Button title="Ir a Mis Casos" onPress={navigateToMisCasos}></Button>
       </View>
     </ScrollView>
   );
